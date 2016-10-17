@@ -1,8 +1,8 @@
-<h3>Agenten</h3>
+<h3>Agents</h3>
 <h4>
-	<small>angemeldet</small>
+	<small>Registered</small>
 	<span class="badge {% if agent_stats.available > 0 %}badge-success{% else %}badge-important{% endif %}">{{ agent_stats.available }}</span>
-	<small>frei</small>
+	<small>Free</small>
 	<span class="badge {% if agent_stats.free > 0 %}badge-success{% else %}badge-important{% endif %}">{{ agent_stats.free }}</span>
 </h4>
 
@@ -13,8 +13,8 @@
 			<th width="30%">Agent</th>
 			<th width="30%">Queues/Level</th>
 			<th width="15%">Status</th>
-			<th width="10%">Anrufe</th>
-			<th width="15%">Letzter Anruf</th>
+			<th width="10%">Calls</th>
+			<th width="15%">Last Call</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -32,24 +32,24 @@
 			<td>
 				{% if agent.callstate %}
 					{% if agent.direction == 'caller' %}
-				<span class="label label-important">telefoniert &#8614;</span>
+				<span class="label label-important">phone &#8614;</span>
 					{% else %}
 						{% if agent.callstate == 'RINGING' %}
-				<span class="label label-warning">klingelt &#8612;</span>
+				<span class="label label-warning">ringing &#8612;</span>
 						{% else %}
-				<span class="label label-important">telefoniert &#8612;</span>
+				<span class="label label-important">phone &#8612;</span>
 						{% endif %}
 					{% endif %}
 				{% elif agent.status == 'Logged Out' %}
-				<span class="label">abgemeldet</span>
+				<span class="label">logged out</span>
 				{% elif agent.status == 'On Break' or agent.state == 'Idle' %}
-				<span class="label label-info">pausiert</span>
+				<span class="label label-info">Idle</span>
 				{% elif agent.state == 'Receiving' %}
-				<span class="label label-warning">klingelt &#8612;</span>
+				<span class="label label-warning">Receiving &#8612;</span>
 				{% elif agent.state == 'In a queue call' %}
-				<span class="label label-important">telefoniert &#8612;</span>
+				<span class="label label-important">phone &#8612;</span>
 				{% else %}
-				<span class="label label-success">frei</span>
+				<span class="label label-success">free</span>
 				{% endif %}
 			</td>
 			<td>{{ agent.calls_answered|int|default('-', true) }}</th>
@@ -68,5 +68,5 @@
 </table>
 {% else %}
 <br/>
-<div class="alert">Es sind keine Agenten registriert!</div>
+<div class="alert">There are no agents registered!</div>
 {% endif %}
