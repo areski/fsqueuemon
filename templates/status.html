@@ -23,7 +23,7 @@
 
 		$('#content').load('{{ url_for(content_view, **content_parameters)|safe }}',function(response, status, xhr) {
 			if (status == "error") {
-				var msg = "Seite konnte nicht geladen werden.";
+				var msg = "Page cannot be loaded.";
 				$("#content").html('<div class="row-fluid"><div class="span4">&nbsp;</div><div class="span4"><div class="alert alert-error">' + msg + '</div></div></div>');
 			}
 		});
