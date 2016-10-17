@@ -1,4 +1,4 @@
-{% set member_state_text = {'Unknown': 'unbekannt', 'Waiting': 'wartet', 'Trying': 'klingelt', 'Answered': 'spricht', 'Abandoned': 'abgesprungen' } %}
+{% set member_state_text = {'Unknown': 'unknown', 'Waiting': 'waiting', 'Trying': 'trying', 'Answered': 'answered', 'Abandoned': 'abandoned' } %}
 {% set member_state_label = {'Unknown': '', 'Waiting': 'label-warning', 'Trying': 'label-important', 'Answered': 'label-success', 'Abandoned': '' } %}
 
 <h3>Queues</h3>
@@ -19,7 +19,7 @@
 			<th width="15%">Status</th>
 			<th width="30%">Name</th>
 			<th width="30%">Caller ID</th>
-			<th width="15%">seit</th>
+			<th width="15%">Since</th>
 		</tr>
 	</thead>
 	<tbody>
