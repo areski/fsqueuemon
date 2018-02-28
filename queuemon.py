@@ -16,9 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-
-URI = 'http://freeswitch:works@127.0.0.1:8080'
-
+#
 from flask import Flask, request, render_template, abort, redirect, jsonify
 from pprint import pformat
 from urllib import urlencode
@@ -27,13 +25,15 @@ from datetime import datetime
 import time
 from backends import CallcenterStatusBackend
 
+URI = 'http://freeswitch:works@127.0.0.1:8080'
 app = Flask(__name__)
 
 backend = CallcenterStatusBackend
 
 hide_agents = (
     'someagent@mydomain.example.com',
-    )
+)
+
 
 @app.template_filter('tsformat')
 def filter_timestamp_format(timestamp):
@@ -49,6 +49,7 @@ def filter_timestamp_format(timestamp):
             ts += "%.1f Stunden " % hours
     return ts
 
+
 @app.template_filter('deltaformat')
 def filter_timedelta_format(timestamp):
     now = int(time.mktime(datetime.now().timetuple()))
@@ -61,17 +62,20 @@ def filter_timedelta_format(timestamp):
     output += "%s Sekunden" % seconds
     return output
 
+
 @app.route('/raw')
 def raw_status():
     fs = backend(URI)
     data = {'agents': fs.get_agents(), 'queues': fs.get_queues()}
     return '<pre>%s</pre>' % pformat(data, True)
 
+
 @app.route('/json')
 def json_status():
     fs = backend(URI)
     data = {'agents': fs.get_agents(), 'queues': fs.get_queues()}
     return jsonify(data)
+
 
 @app.route('/')
 def status():
@@ -84,6 +88,7 @@ def status():
         content_parameters['showclock'] = request.args['showclock']
     return render_template('status.html', content_view='status_content', content_parameters=content_parameters)
 
+
 @app.route('/content/status')
 def status_content():
     fs = backend(URI)
@@ -92,12 +97,13 @@ def status_content():
         if a in hide_agents:
             del agents[a]
     agent_stats = {
-            'available': len([a['name'] for a in agents.itervalues() if a['status'] != 'Logged Out']),
-            'free': len([a['name'] for a in agents.itervalues() if a['status'] != 'Logged Out' and a.get('callstate') is None])
-            }
+        'available': len([a['name'] for a in agents.itervalues() if a['status'] != 'Logged Out']),
+        'free': len([a['name'] for a in agents.itervalues() if a['status'] != 'Logged Out' and a.get('callstate') is None])
+    }
     queues = fs.get_queues()
     clock = strftime('%H:%M') if request.args.get('showclock') and request.args['showclock'] != 0 else None
     return render_template('status_content.html', agents=agents, agent_stats=agent_stats, queues=queues, clock=clock)
+
 
 @app.route('/settings', methods=['POST'])
 def settings():
