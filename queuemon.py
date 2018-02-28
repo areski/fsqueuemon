@@ -62,8 +62,8 @@ def filter_timedelta_format(timestamp):
     seconds = delta % 60
     output = ""
     if minutes:
-        output += "%s Minuten " % minutes
-    output += "%s Sekunden" % seconds
+        output += "%s Minutes " % minutes
+    output += "%s Seconds" % seconds
     return output
 
 
