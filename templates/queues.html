@@ -5,7 +5,7 @@
 {% for name, queue in queues.items()|sort %}
 <div class="row-fluid">
 	<div class="span12">
-		<h4>{{ queue.name.split('@')[0]|capitalize }}
+		<h4>{{ queue.name|capitalize }}
 			<small>waiting</small>
 			<span class="badge{% if queue.waiting_count %} badge-important{% endif %}">{{ queue.waiting_count }}</span>
 		</h4>

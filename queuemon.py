@@ -44,13 +44,12 @@ def filter_timestamp_format(timestamp):
     ts = datetime.fromtimestamp(int(timestamp))
     delta = datetime.now() - ts
     if delta.days < 1:
-        ts = "vor "
         hours = delta.seconds / 3600.
         if hours < 1:
             minutes = delta.seconds % 3600 / 60
-            ts += "%s Min." % minutes
+            ts = "%s minutes ago" % minutes
         else:
-            ts += "%.1f Stunden " % hours
+            ts = "%.1f hours ago" % hours
     return ts
 
 

@@ -22,13 +22,13 @@
 		{% if not request.args.showoffline or request.args.showoffline != "0" or agent.status != 'Logged Out' %}
 		<tr style="{% if agent.status != 'Logged Out' %}font-weight:bold;{% else %}color:grey;{% endif %}">
 			<td>
-				{{ agent.name.split('@')[0] }}
+				{{ agent.name }}
 				{% if agent.status != 'Logged Out' %}
 					{% if agent.extension %}an {{ agent.extension }}{% endif %}
 					{% if agent.realname %}({{ agent.realname }}){% endif %}
 				{% endif %}
 			</td>
-			<td>{% for q in agent.queues|sort %}{{ q.queue.split('@')[0]|capitalize }}/{{ q.level }}{% if not loop.last %}, {% endif %}{% endfor %}</td>
+			<td>{% for q in agent.queues|sort %}{{ q.queue|capitalize }}/{{ q.level }}{% if not loop.last %}, {% endif %}{% endfor %}</td>
 			<td>
 				{% if agent.callstate %}
 					{% if agent.direction == 'caller' %}
