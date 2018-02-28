@@ -24,14 +24,18 @@ from time import strftime
 from datetime import datetime
 import time
 from backends import CallcenterStatusBackend
+import config
+try:
+    import private_config as config
+except ImportError:
+    pass
 
-URI = 'http://freeswitch:works@127.0.0.1:8080'
 app = Flask(__name__)
 
 backend = CallcenterStatusBackend
 
 hide_agents = (
-    'someagent@mydomain.example.com',
+    # 'agent@mydomain.com',
 )
 
 
@@ -65,14 +69,14 @@ def filter_timedelta_format(timestamp):
 
 @app.route('/raw')
 def raw_status():
-    fs = backend(URI)
+    fs = backend(config.URI, config.DOMAIN)
     data = {'agents': fs.get_agents(), 'queues': fs.get_queues()}
     return '<pre>%s</pre>' % pformat(data, True)
 
 
 @app.route('/json')
 def json_status():
-    fs = backend(URI)
+    fs = backend(config.URI, config.DOMAIN)
     data = {'agents': fs.get_agents(), 'queues': fs.get_queues()}
     return jsonify(data)
 
@@ -91,7 +95,7 @@ def status():
 
 @app.route('/content/status')
 def status_content():
-    fs = backend(URI)
+    fs = backend(config.URI, config.DOMAIN)
     agents = fs.get_agents()
     for a in agents.keys():
         if a in hide_agents:

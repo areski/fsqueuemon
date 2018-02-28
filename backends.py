@@ -21,10 +21,9 @@ from xml.etree.cElementTree import XML
 
 class CallcenterStatusBackend(object):
 
-    domain = 'mydomain.example.com'
-
-    def __init__(self, uri):
+    def __init__(self, uri, domain):
         self.server = ServerProxy(uri)
+        self.domain = domain
 
     def _parse_callcenter(self, apiresult):
         """Parse output of mod_callcenter's api output"""

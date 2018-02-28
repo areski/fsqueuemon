@@ -13,9 +13,8 @@ It uses FreeSWITCH's `mod_xml_rpc` to interact with FreeSWITCH using XML-RPC.
 
 ## Setup
 
-fsqueuemon was developed using Python 2.7 and Flask 0.8.
 The `queuemon.py` script can be executed to locally start a development server.
-See the Flask documentation for deployment options. 
+See the Flask documentation for deployment options.
 
 Please adapt these three settings to your environment:
 
@@ -23,7 +22,28 @@ Please adapt these three settings to your environment:
 * `URI` in `queuemon.py` to access `mod_xml_rpc`
 * `hide_agents` can contain agents that should never be shown
 
+## Install
+
+Simple install instructions:
+
+  mkvirtualenv fsqueuemon
+  cd /app/
+  git clone https://github.com/areski/fsqueuemon.git
+  cd fsqueuemon
+  pip install -r requirements.txt
+  python queuemon.py
+
+Configure:
+
+  cp config.py private_config.py
+
+Then edit `private_config.py` and set your correct XML_RPC settings as well as your domain.
+
+## Deploy
+
+Deploy in production using gunicorn, ref: https://medium.com/@mthipparthi/supervisor-to-control-flask-gunicorn-ec07e81a26b6
+
 ## ToDo
 
-The few strings in the UI are German right now and not yet i18nalized. 
+The few strings in the UI are German right now and not yet i18nalized.
 
