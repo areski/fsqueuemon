@@ -100,8 +100,14 @@ def status_content():
         if a in hide_agents:
             del agents[a]
     agent_stats = {
-        'available': len([a['name'] for a in agents.itervalues() if a['status'] != 'Logged Out']),
-        'free': len([a['name'] for a in agents.itervalues() if a['status'] != 'Logged Out' and a.get('callstate') is None])
+        'available':
+            len([a['name'] for a in agents.itervalues() if a['status'] != 'Logged Out']),
+        'free':
+            len([a['name'] for a in agents.itervalues() if a['status'] != 'Logged Out' and a.get('state') == 'Waiting']),
+        'phone':
+            len([a['name'] for a in agents.itervalues() if a['status'] != 'Logged Out' and a.get('state') == 'In a queue call']),
+        'receiving':
+            len([a['name'] for a in agents.itervalues() if a['status'] != 'Logged Out' and a.get('state') == 'Receiving'])
     }
     queues = fs.get_queues()
     clock = strftime('%H:%M') if request.args.get('showclock') and request.args['showclock'] != 0 else None

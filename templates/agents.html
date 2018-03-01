@@ -4,6 +4,10 @@
 	<span class="badge {% if agent_stats.available > 0 %}badge-success{% else %}badge-important{% endif %}">{{ agent_stats.available }}</span>
 	<small>Free</small>
 	<span class="badge {% if agent_stats.free > 0 %}badge-success{% else %}badge-important{% endif %}">{{ agent_stats.free }}</span>
+	<small>Phone &#8612;</small>
+	<span class="badge {% if agent_stats.phone > 0 %}badge-important{% endif %}">{{ agent_stats.phone }}</span>
+	<small>Receiving &#8612;</small>
+	<span class="badge {% if agent_stats.receiving > 0 %}badge-warning{% endif %}">{{ agent_stats.receiving }}</span>
 </h4>
 
 {% if agents %}
@@ -47,7 +51,7 @@
 				{% elif agent.state == 'Receiving' %}
 				<span class="label label-warning">Receiving &#8612;</span>
 				{% elif agent.state == 'In a queue call' %}
-				<span class="label label-important">phone &#8612;</span>
+				<span class="label label-important">Phone &#8612;</span>
 				{% else %}
 				<span class="label label-success">free</span>
 				{% endif %}

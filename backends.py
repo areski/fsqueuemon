@@ -73,6 +73,7 @@ class CallcenterStatusBackend(object):
         # Get extension, real name and presence ID of logged in agents
         for agtid, agent in agents.iteritems():
             if agent['contact']:
+                # contact = ['[leg_timeout=45]user', 'myagent']
                 contact = agent['contact'].split('/')
                 if contact[0].endswith('loopback'):
                     agent['extension'] = contact[1]

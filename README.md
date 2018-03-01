@@ -4,12 +4,16 @@ Web status monitor for FreeSWITCH's mod_callcenter queues and agents
 
 ![Screenshot](https://raw.githubusercontent.com/gonicus/fsqueuemon/master/screenshot.png)
 
+This is a fork from [https://github.com/gonicus/fsqueuemon], authored by `Gonicus`.
+
+
 ## Description
 
 A simple web status monitor / dashboard for mod_callcenter. It will show active/inactive agents and queued callers.
 
 fsqueuemon is implemented in Python using the Flask web microframework (http://flask.pocoo.org/).
 It uses FreeSWITCH's `mod_xml_rpc` to interact with FreeSWITCH using XML-RPC.
+
 
 ## Setup
 
@@ -21,6 +25,7 @@ Please adapt these three settings to your environment:
 * `domain` in `backends.py` should be the domain part of the queues/agents you want to display
 * `URI` in `queuemon.py` to access `mod_xml_rpc`
 * `hide_agents` can contain agents that should never be shown
+
 
 ## Install
 
@@ -39,11 +44,17 @@ Configure:
 
 Then edit `private_config.py` and set your correct XML_RPC settings as well as your domain.
 
+
 ## Deploy
 
 Deploy in production using gunicorn, ref: https://medium.com/@mthipparthi/supervisor-to-control-flask-gunicorn-ec07e81a26b6
+
 
 ## ToDo
 
 The few strings in the UI are German right now and not yet i18nalized.
 
+
+## License
+
+FSQueueMon is licensed under GPL, see LICENSE file
